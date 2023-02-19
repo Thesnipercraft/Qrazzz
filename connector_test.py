@@ -2,9 +2,7 @@ from connector import UrlQueue
 from connector import DataStore
 
 url_queue = UrlQueue(host="host", user="user", password="pass", database="database")
-
 data_store = DataStore(host="host", user="user", password="pass", database="database")
-
 url_queue.add_url("https://example.com/1")
 url_queue.add_url("https://example.com/2")
 url_queue.add_url("https://example.com/3")

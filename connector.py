@@ -73,7 +73,7 @@ class DataStore:
         self.cursor.execute(request, values)
         self.db.commit()
 
- '''   def delete_data(self, id):
+    '''def delete_data(self, id):
         request = "DELETE FROM Datastore WHERE id = %s"
         values = (id,)
         self.cursor.execute(request, values)
