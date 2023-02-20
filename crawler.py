@@ -1,3 +1,5 @@
+NOT FINISHED, DON'T USE THIS  !! ( if you want remove this line)
+
 import requests
 
 from connector import UrlQueue
