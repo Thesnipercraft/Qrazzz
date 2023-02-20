@@ -9,6 +9,9 @@ header = {
 
 q = Queue()
 
+start_url = "https://example.com"
+q.put(start_url)
+
 def crawl(url):
     try:
         response = requests.get(url, headers=header)
@@ -28,5 +31,5 @@ def crawl(url):
         return
 
 
-
-crawl("https://example.com/")
+while not q.empty():
+    crawl(q.get())
