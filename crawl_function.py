@@ -1,3 +1,14 @@
+from queue import Queue
+from bs4 import BeautifulSoup  
+import requests
+
+header = {
+    'User-Agent': 'QrazzzBot',
+    'From': 'your email'
+}
+
+q = Queue()
+
 def crawl(url):
     try:
         response = requests.get(url, headers=header)
@@ -12,5 +23,10 @@ def crawl(url):
             if href and (href.startswith("http") or href.startswith("https")):
                 q.put(href)
                 print(href)
+                
     else:
         return
+
+
+
+crawl("https://youtube.com/")
