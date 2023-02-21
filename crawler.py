@@ -16,20 +16,29 @@ header = {
 	'From': 'your email'
 }
 
-
-start_url = "https://google.com/"
-
+url_queue.add_url("https://example.com/")
 def crawl(url):
-	try:
-		response = requests.get(url, headers=header)
-	except requests.exceptions.RequestException:
-		print("Error code 1")
+    try:
+        response = requests.get(url, headers=header)
+    except Exception as e:
+        return
 
-	if response.status_code == 200:
-		print(response.text)
-	else:
-		pass
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        links = soup.find_all("a")
+        for link in links:
+            href = link.get("href")
+            if href and (href.startswith("http") or href.startswith("https")):
+                url_queue.add_url(href)
+                print(href)
+                
+    else:
+        return
 
 
-
-crawl(start_url)
+while True:
+	id = url_queue.get_id()
+	url_queue.delete_url(id)
+	url = url_queue.get_url(id)
+	crawl(url)
+	time.sleep(0.1)
