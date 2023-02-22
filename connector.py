@@ -32,6 +32,11 @@ class UrlQueue:
         self.db.commit()
         return url
 
+    def empty(self):
+        self.cursor.execute("SELECT COUNT(*) FROM UrlQueue")
+        count = self.cursor.fetchone()[0]
+        return count == 0
+
 class DataStore:
 
 
