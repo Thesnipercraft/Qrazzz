@@ -12,9 +12,9 @@ class UrlQueue:
         self.create_table_if_not_exists()
 
     def create_table_if_not_exists(self):
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS UrlQueue (url VARCHAR(2048))")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS UrlQueue (id INT AUTO_INCREMENT PRIMARY KEY, url VARCHAR(2048))")
 
-    def add_url(self, url):
+    def put(self, url):
         request = "INSERT INTO UrlQueue (url) VALUES (%s)"
         values = (url,)
         self.cursor.execute(request, values)
