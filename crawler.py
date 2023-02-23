@@ -24,18 +24,18 @@ def crawl(url):
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
         links = soup.find_all("a")
-        found = []
+        urls = []
         for link in links:
             href = link.get("href")
             if href and (href.startswith("http") or href.startswith("https")):
             	visited.add(href) 
             	q.put(href)
-            	found.append(href)
-        return found
+            	urls.append(href)
+        return urls
             	
 
     else:
-        return
+        return []
 
 while not q.empty():
 	url = q.get()
