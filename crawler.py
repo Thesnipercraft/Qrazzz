@@ -38,5 +38,5 @@ def crawl(url):
 while not q.empty():
 	url = q.get()
 	crawl = crawl(url)
-	for c in crawl:
-		print(c)
+	for u in crawl:
+		print(u)
