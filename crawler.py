@@ -3,13 +3,11 @@ import time
 from bs4 import BeautifulSoup
 from queue import Queue
 
-
 q = Queue()
 
 header =  {
 	'User-Agent': 'QrazzzBot'
 }
-
 
 q.put("https://google.com/")
 
@@ -39,6 +37,6 @@ def crawl(url):
 
 while not q.empty():
 	url = q.get()
-	cs = crawl(url)
-	for c in cs:
+	crawl = crawl(url)
+	for c in crawl:
 		print(c)
