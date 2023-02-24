@@ -2,4 +2,6 @@
 ---- Qrazzz Web Crawler - (in dev) ----
 
 
-Qrazzz is a web crawler coded in python. 
+Qrazzz est un web crawler en Python, utilisant principalement les librairies Requests et BeautifulSoup. Ainsi que Queue & Mysql-Connector.
+
+N'hesiter pas a laisser une Star, cela me fera plaisir :D.
