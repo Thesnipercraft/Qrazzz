@@ -6,7 +6,8 @@ from queue import Queue
 q = Queue()
 
 header =  {
-	'User-Agent': 'QrazzzBot'
+	'User-Agent': 'QrazzzBot',
+	'From': 'your email'
 }
 
 q.put("https://google.com/")
