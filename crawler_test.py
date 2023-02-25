@@ -3,22 +3,22 @@ import mysql.connector
 from bs4 import BeautifulSoup
 from queue import Queue
 
-db = mysql.connector.connect(host="localhost", user="Qrazzz", password="2010", database="Qrazzz")
+db = mysql.connector.connect(host="localhost", user="user", password="pass", database="Qrazzz")
 
 cursor = db.cursor()
 
-cursor.execute("CREATE TABLE IF NOT EXISTS Visited (url VARCHAR(2048))")
+cursor.execute("CREATE TABLE IF NOT EXISTS Visited (url VARCHAR(1000) PRIMARY KEY)")
 
 q = Queue()
 
-header =  {
-	'User-Agent': 'QrazzzBot'
+header = {
+    'User-Agent': 'QrazzzBot'
 }
 
-
-q.put("https://crawler-test.com/")
+q.put("https://google.com/")
 
 visited = set()
+
 
 def crawl(url):
     try:
@@ -33,18 +33,26 @@ def crawl(url):
         for link in links:
             href = link.get("href")
             if href and (href.startswith("http") or href.startswith("https")):
-            	visited.add(href) 
-            	q.put(href)
-            	urls.append(href)
+                # Vérifier si l'URL a déjà été visitée
+                cursor.execute("SELECT url FROM Visited WHERE url=%s", (href,))
+                result = cursor.fetchone()
+                if result:
+                    continue
+                else:
+                    # Ajouter l'URL dans la base de données
+                    cursor.execute("INSERT INTO Visited (url) VALUES (%s)", (href,))
+                    db.commit()
+                    visited.add(href)
+                    q.put(href)
+                    urls.append(href)
         return urls
-            	
 
     else:
         return []
 
-while not q.empty():
-	url = q.get()
-	cs = crawl(url)
-	for c in cs:
-	   print(c)
 
+while not q.empty():
+    url = q.get()
+    cs = crawl(url)
+    for c in cs:
+        print(c)
