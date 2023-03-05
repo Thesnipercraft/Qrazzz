@@ -52,4 +52,4 @@ def get_sitemap(sitemap_url):
 
 
 
-print(get_sitemap(get_sitemap_url(get_robots(add_robots(get_just_domain("http://213.171.194.199/"))))))
+print(get_sitemap(get_sitemap_url(get_robots(add_robots(get_just_domain("https://google.com/robots.txt"))))))
